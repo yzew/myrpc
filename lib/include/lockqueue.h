@@ -21,6 +21,7 @@ public:
     T Pop()
     {
         std::unique_lock<std::mutex> lock(m_mutex);
+        // while防止线程的虚假唤醒
         while (m_queue.empty())
         {
             // 日志队列为空，线程进入wait状态

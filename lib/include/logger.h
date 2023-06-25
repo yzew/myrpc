@@ -4,11 +4,13 @@
 
 // 定义宏 LOG_INFO("xxx %d %s", 20, "xxxx")
 #define LOG_INFO(logmsgformat, ...) \
+    // 为了避免出问题，一般采用do while的形式
     do \
     {  \
         Logger &logger = Logger::GetInstance(); \
         logger.SetLogLevel(INFO); \
         char c[1024] = {0}; \
+        // ##__VA_ARGS__是可变参列表
         snprintf(c, 1024, logmsgformat, ##__VA_ARGS__); \
         logger.Log(c); \
     } while(0) \

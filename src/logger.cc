@@ -20,6 +20,7 @@ Logger::Logger()
             tm *nowtm = localtime(&now);
 
             char file_name[128];
+            // sprintf函数将内容打印到file_name这个字符串中
             sprintf(file_name, "%d-%d-%d-log.txt", nowtm->tm_year+1900, nowtm->tm_mon+1, nowtm->tm_mday);
 
             FILE *pf = fopen(file_name, "a+");
@@ -39,7 +40,7 @@ Logger::Logger()
                     (m_loglevel == INFO ? "info" : "error"));
             msg.insert(0, time_buf);
             msg.append("\n");
-
+            // fputs把字符串写入到指定的流 stream 中
             fputs(msg.c_str(), pf);
             fclose(pf);
         }
